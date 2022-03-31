@@ -4,42 +4,41 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour {
 
-      //public Animator animator;
-      public Rigidbody rb;
-      public float jumpForce = 20f;
-      public Transform feet;
-      public LayerMask groundLayer;
-      public LayerMask enemyLayer;
-      public bool isAlive = true;
-      //public AudioSource JumpSFX;
-
-      void Start(){
-            //animator = gameObject.GetComponentInChildren<Animator>();
-            rb = GetComponent<Rigidbody>();
-      }
-
+     public float speed;
+     public float rotSpeed;
+     public float JumpHeight;
+     public bool isGrounded;
+     public float GravityStrength;
+     Rigidbody rb;
+     
+     void Start() {
+         Vector3 gravityS = new Vector3(0, GravityStrength, 0);
+         
+         Physics.gravity = gravityS;
+         rb = GetComponent<Rigidbody>();
+         isGrounded = true;
+     }
+     
      void Update() {
-           if ((Input.GetButtonDown("Jump")) // && (IsGrounded()) 
-           && (isAlive==true)) {
-                  Jump();
-               // animator.SetTrigger("Jump");
-               // JumpSFX.Play();
-            }
-      }
-
-      public void Jump() {
-            rb.velocity = Vector3.up * jumpForce;
-            //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-            //rb.velocity = movement;
-      }
-
-      // public bool IsGrounded() {
-      //       // Collider groundCheck = Physics.OverlapCircle(feet.position, 2f, groundLayer);
-      //       // Collider enemyCheck = Physics.OverlapCircle(feet.position, 2f, enemyLayer);
-      //      if ((groundCheck != null) || (enemyCheck != null)) {
-      //             return true;
-      //             //Debug.Log("I can jump now!");
-      //       }
-      //       return false;
-      // }
+         var z = Input.GetAxis("Vertical") * speed;
+         var y = Input.GetAxis("Horizontal") * rotSpeed;
+         
+         transform.Translate(0, 0, z);
+         transform.Rotate(0, y, 0);
+         
+         if (Input.GetKey(KeyCode.Space) && isGrounded == true) {
+             Jump();
+         }
+     }
+     
+     void Jump() {
+         rb.AddForce(new Vector3(0, JumpHeight, 0));
+         isGrounded = false;
+         // Animation goes here
+     }
+     
+     void OnCollisionEnter(Collision other) {
+         // if (other.collisionInfo.Collider.tag == "Ground")
+            isGrounded = true;
+     }
 }
