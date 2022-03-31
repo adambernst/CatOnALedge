@@ -1,41 +1,45 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-
-[RequireComponent(typeof(Rigidbody))]
+using System.Collections;
+using UnityEngine;
 
 public class PlayerJump : MonoBehaviour {
-    
-    public float jumpForce = 2.0f;
-    public float fallMultiplier = 2.5f;
-    public Vector3 jump;
-    
-    public bool isGrounded;
-    
-    Rigidbody rb;
-    
-    void Awake() {
-        rb = GetComponent<Rigidbody>();
-        jump = new Vector3(0.0f, 2.0f, 0.0f);
-    }
-    
-    private void OnCollisionStay(Collision other){
-        if (other.collider.CompareTag("Ground"))
-            isGrounded = true;
-    }
-    
-    void Update() {
-        // if (rb.velocity.y < 0) {
-        if (!isGrounded) {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        // else if (rb.velocity.y > 0 && (Input.GetButton("Jump"))) 
-        else if (isGrounded && (Input.GetButton("Jump"))) {
-            // rb.velocity += Vector3.up * Physics.gravity.y * (jumpForce - 1) * Time.deltaTime;
-            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
-        }
-        
-        
-    }
+
+      //public Animator animator;
+      public Rigidbody rb;
+      public float jumpForce = 20f;
+      public Transform feet;
+      public LayerMask groundLayer;
+      public LayerMask enemyLayer;
+      public bool isAlive = true;
+      //public AudioSource JumpSFX;
+
+      void Start(){
+            //animator = gameObject.GetComponentInChildren<Animator>();
+            rb = GetComponent<Rigidbody>();
+      }
+
+     void Update() {
+           if ((Input.GetButtonDown("Jump")) // && (IsGrounded()) 
+           && (isAlive==true)) {
+                  Jump();
+               // animator.SetTrigger("Jump");
+               // JumpSFX.Play();
+            }
+      }
+
+      public void Jump() {
+            rb.velocity = Vector3.up * jumpForce;
+            //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
+            //rb.velocity = movement;
+      }
+
+      // public bool IsGrounded() {
+      //       // Collider groundCheck = Physics.OverlapCircle(feet.position, 2f, groundLayer);
+      //       // Collider enemyCheck = Physics.OverlapCircle(feet.position, 2f, enemyLayer);
+      //      if ((groundCheck != null) || (enemyCheck != null)) {
+      //             return true;
+      //             //Debug.Log("I can jump now!");
+      //       }
+      //       return false;
+      // }
 }
