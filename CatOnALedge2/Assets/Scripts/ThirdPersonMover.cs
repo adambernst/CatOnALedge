@@ -23,7 +23,7 @@ public class ThirdPersonMover : MonoBehaviour {
         float horiz = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
         Vector3 direct = new Vector3(horiz, 0f, vert).normalized;
-
+                
         if (direct.magnitude >= 0.1f) {
             float targetAngle = Mathf.Atan2(direct.x, direct.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -39,12 +39,21 @@ public class ThirdPersonMover : MonoBehaviour {
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded){
-            Debug.Log("Jump pressed");
+            Debug.Log("Jumpin");
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        } else {
+            Debug.Log("Not Jumpin");
         }
 
         //GRAVITY
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        
+        if (isGrounded) {
+            Debug.Log("Grounded: Yes");
+        } else {
+            Debug.Log("Grounded: No");
+        }
+
     }
 }
