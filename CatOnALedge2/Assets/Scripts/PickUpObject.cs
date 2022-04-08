@@ -20,7 +20,7 @@ public class PickUpObject : MonoBehaviour
     {
         if(canpickup == true) // if you enter thecollider of the objecct
         {
-            if (Input.GetKeyDown("e") && hasItem == false)  // can be e or any key
+            if (Input.GetKey("e") && hasItem == false)  // can be e or any key
             {
                 ObjectIwantToPickUp.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
                 ObjectIwantToPickUp.transform.position = mouth.transform.position; // sets the position of the object to your hand position
@@ -28,7 +28,7 @@ public class PickUpObject : MonoBehaviour
                 hasItem = true;
             }
         }
-        if (Input.GetButtonDown("q") && hasItem == true) // if you have an item and get the key to remove the object, again can be any key
+        if (Input.GetKey("q") && hasItem == true) // if you have an item and get the key to remove the object, again can be any key
         {
             ObjectIwantToPickUp.GetComponent<Rigidbody>().isKinematic = false; // make the rigidbody work again
             ObjectIwantToPickUp.transform.parent = null; // make the object no be a child of the hands
@@ -37,7 +37,7 @@ public class PickUpObject : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) // to see when the player enters the collider
     {
-        if(other.gameObject.tag == "object") //on the object you want to pick up set the tag to be anything, in this case "object"
+        if(other.gameObject.tag == "kitten") //on the object you want to pick up set the tag to be anything, in this case "object"
         {
             canpickup = true;  //set the pick up bool to true
             ObjectIwantToPickUp = other.gameObject; //set the gameobject you collided with to one you can reference
