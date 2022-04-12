@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &6129195833463285536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865552389054901722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.119882084, z: 0.02}
+  m_Center: {x: 0, y: -0.049941044, z: 0}
 --- !u!1 &4962134299373061601
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +22,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5387410048235332606}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoadPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,8 +111,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: road_v4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 06eee7bd7b31b49dabb67d37d1c673d4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06eee7bd7b31b49dabb67d37d1c673d4, type: 3}
+--- !u!1 &3865552389054901722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 06eee7bd7b31b49dabb67d37d1c673d4, type: 3}
+  m_PrefabInstance: {fileID: 4135530117949198475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4534812315575908192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 06eee7bd7b31b49dabb67d37d1c673d4, type: 3}
