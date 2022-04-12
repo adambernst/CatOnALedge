@@ -99,7 +99,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   speed: 10
   gravity: -9.81
-  jumpHeight: 30
+  jumpHeight: 35
   groundCheck: {fileID: 7247617171364027819}
   groundDistance: 0.4
   groundMask:
