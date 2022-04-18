@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - kitten
+  - kittenBed
   layers:
   - Default
   - TransparentFX

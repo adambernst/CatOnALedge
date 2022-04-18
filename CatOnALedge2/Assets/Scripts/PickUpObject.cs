@@ -36,7 +36,7 @@ public class PickUpObject : MonoBehaviour
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
         {
             kitten.GetComponent<Rigidbody>().isKinematic = false; // make the rigidbody work again
-            Vector3 modifier = new Vector3(0f, -2.1f, 0f);
+            Vector3 modifier = new Vector3(0f, -1.9f, 0f);
             kitten.transform.position = kitten.transform.position + modifier;
             kitten.transform.parent = null; // make the object not be a child of the hands
             hasItem = false;
@@ -46,9 +46,14 @@ public class PickUpObject : MonoBehaviour
     {
         if(other.gameObject.tag == "kitten" && !hasItem) //on the object you want to pick up set the tag to be anything, in this case "object"
         {
-            canpickup = true;  //set the pick up bool to true
-            kitten = other.gameObject; //set the gameobject you collided with to one you can reference
-            displayMessage = true;
+            //KittenManager manager = other.gameObject.GetComponent<KittenManager>();
+            //if (!manager.isHome)
+            if (!hasItem)
+            {
+                canpickup = true;  //set the pick up bool to true
+                kitten = other.gameObject; //set the gameobject you collided with to one you can reference
+                displayMessage = true;    
+            }
         }
     }
     private void OnTriggerExit(Collider other)
