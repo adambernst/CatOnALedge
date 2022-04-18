@@ -8,6 +8,10 @@ public class PickUpObject : MonoBehaviour
     bool canpickup; //a bool to see if you can or cant pick up the item
     GameObject kitten; // the gameobject onwhich you collided with
     bool hasItem; // a bool to see if you have an item in your hand
+    
+    public string message = "Press E to pick up the kitten and Q to put it down";
+    bool displayMessage = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,7 @@ public class PickUpObject : MonoBehaviour
         {
             if (Input.GetKey("e") && hasItem == false)  // can be e or any key
             {
+                displayMessage = false;
                 kitten.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
                 kitten.transform.position = mouth.transform.position; // sets the position of the object to your hand position
                 kitten.transform.parent = mouth.transform; //makes the object become a child of the parent so that it moves with the hands
@@ -43,11 +48,19 @@ public class PickUpObject : MonoBehaviour
         {
             canpickup = true;  //set the pick up bool to true
             kitten = other.gameObject; //set the gameobject you collided with to one you can reference
+            displayMessage = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         canpickup = false; //when you leave the collider set the canpickup bool to false
-     
+        displayMessage = false;
+    }
+    
+    void OnGUI()
+    {
+        if (displayMessage) {
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), message);
+        }
     }
 }
