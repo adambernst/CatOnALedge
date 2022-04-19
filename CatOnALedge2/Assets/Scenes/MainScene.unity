@@ -1649,7 +1649,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7765667, y: 1}
+    m_SensorSize: {x: 1.7784091, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3296,7 +3296,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7765667, y: 1}
+    m_SensorSize: {x: 1.7784091, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6268,7 +6268,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bd9af3c27dd9e4355afdd72c6bef2f17, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3040b200bd60d44998e3eb59691b152b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.269
   m_Pitch: 1
@@ -20949,7 +20949,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7765667, y: 1}
+    m_SensorSize: {x: 1.7784091, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -33273,7 +33273,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7765667, y: 1}
+    m_SensorSize: {x: 1.7784091, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
