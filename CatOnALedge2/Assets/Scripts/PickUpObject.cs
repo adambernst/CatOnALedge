@@ -11,6 +11,7 @@ public class PickUpObject : MonoBehaviour
     
     public string message = "Press E to pick up the kitten and Q to put it down";
     bool displayMessage = false;
+    bool overBed = false;
     
     // Start is called before the first frame update
     void Start()
@@ -40,10 +41,16 @@ public class PickUpObject : MonoBehaviour
             kitten.transform.position = kitten.transform.position + modifier;
             kitten.transform.parent = null; // make the object not be a child of the hands
             hasItem = false;
+            if (overBed){
+                KittenManager kitScript = kitten.GetComponent<KittenManager>();
+                kitScript.isHome = true;
+            }
         }
     }
     private void OnTriggerEnter(Collider other) // to see when the player enters the collider
+    //private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "kitten" && !hasItem) //on the object you want to pick up set the tag to be anything, in this case "object"
         {
             //KittenManager manager = other.gameObject.GetComponent<KittenManager>();
@@ -55,8 +62,29 @@ public class PickUpObject : MonoBehaviour
                 displayMessage = true;    
             }
         }
+        if(other.gameObject.tag == "kittenBed")
+        {
+            Debug.Log("Howdy doody");
+        }
     }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        //Debug.Log("weiner " + other.gameObject.tag);
+        if(other.gameObject.tag == "kittenBed"){
+            overBed = true;
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        //Debug.Log("off weiner " + other.gameObject.tag);
+        if(other.gameObject.tag == "kittenBed"){
+            overBed = false;
+        }
+    }
+    
     private void OnTriggerExit(Collider other)
+    //private void OnCollisionExit(Collision other)
     {
         canpickup = false; //when you leave the collider set the canpickup bool to false
         displayMessage = false;
