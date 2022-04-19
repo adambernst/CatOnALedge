@@ -41,10 +41,10 @@ public class PickUpObject : MonoBehaviour
             kitten.transform.position = kitten.transform.position + modifier;
             kitten.transform.parent = null; // make the object not be a child of the hands
             hasItem = false;
-            if (overBed){
-                KittenManager kitScript = kitten.GetComponent<KittenManager>();
-                kitScript.isHome = true;
-            }
+            //if (overBed){
+            //    KittenManager kitScript = kitten.GetComponent<KittenManager>();
+            //    kitScript.isHome = true;
+            //}
         }
     }
     private void OnTriggerEnter(Collider other) // to see when the player enters the collider
