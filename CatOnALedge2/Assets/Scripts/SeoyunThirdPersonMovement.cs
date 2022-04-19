@@ -26,9 +26,18 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
 
     public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f; 
+    public float lowJumpMultiplier = 2f;
+
+    public Animator Anim;
+
+
+    void Start()
+    {
+        Anim = GetComponentInChildren<Animator>();
+    }
 
     // Update is called once per frame
+
     void Update()
     {
         //jump
@@ -48,20 +57,26 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-        } 
-        if (velocity.y > 0 && !Input.GetButtonDown("Jump")) {
+            Anim.SetTrigger("Jump");
+        }
+        if (velocity.y > 0 && !Input.GetButtonDown("Jump"))
+        {
             velocity.y += gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        
+
+
+
+
         //gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
         //walk
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if(direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -69,6 +84,8 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            Anim.SetBool("Idle", false);
         }
+        Anim.SetBool("Idle", true);
     }
 }
