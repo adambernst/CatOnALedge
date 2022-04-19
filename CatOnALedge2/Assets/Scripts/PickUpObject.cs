@@ -6,13 +6,14 @@ public class PickUpObject : MonoBehaviour
 {
     public GameObject mouth; //reference to your hands/the position where you want your object to go
     bool canpickup; //a bool to see if you can or cant pick up the item
-    GameObject kitten; // the gameobject onwhich you collided with
+    private GameObject kitten; // the gameobject onwhich you collided with
+    private KittenManager kitScript;
     bool hasItem; // a bool to see if you have an item in your hand
     
     public string message = "Press E to pick up the kitten and Q to put it down";
     bool displayMessage = false;
     bool overBed = false;
-    
+        
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +42,11 @@ public class PickUpObject : MonoBehaviour
             kitten.transform.position = kitten.transform.position + modifier;
             kitten.transform.parent = null; // make the object not be a child of the hands
             hasItem = false;
-            //if (overBed){
-            //    KittenManager kitScript = kitten.GetComponent<KittenManager>();
-            //    kitScript.isHome = true;
-            //}
+            if (overBed){
+                //KittenManager kitScript = kitten.GetComponent<KittenManager>();
+                kitScript.isHome = true;
+                Destroy(kitten);
+            }
         }
     }
     private void OnTriggerEnter(Collider other) // to see when the player enters the collider
@@ -59,12 +61,9 @@ public class PickUpObject : MonoBehaviour
             {
                 canpickup = true;  //set the pick up bool to true
                 kitten = other.gameObject; //set the gameobject you collided with to one you can reference
+                kitScript = kitten.transform.parent.gameObject.GetComponent<KittenManager>();
                 displayMessage = true;    
             }
-        }
-        if(other.gameObject.tag == "kittenBed")
-        {
-            Debug.Log("Howdy doody");
         }
     }
     

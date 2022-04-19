@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class KittenManager : MonoBehaviour
 {
-    public bool isHome;
+    public bool isHome = false; 
     
-    void Start(){
-        isHome = false;
-    }
+    //void Start(){
+    //   isHome = false;
+    //}
     /*
     private void OnTriggerEnter(Collider other){
     //private void OnCollisionEnter(Collision other){
@@ -16,8 +16,10 @@ public class KittenManager : MonoBehaviour
         if(other.gameObject.tag == "kittenBed"){
             //other.GetComponent<KittenManager>().isHome = true;
             isHome = true;
-            Debug.Log("YEEE HAW");
         }
     }
     */
+    public void setHome(){
+        isHome = true;
+    }
 }
