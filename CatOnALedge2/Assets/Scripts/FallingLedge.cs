@@ -14,7 +14,11 @@ public class FallingLedge : MonoBehaviour
     void Update(){
         if(timerActive && timeLimit > 0){
             timeLimit -= Time.deltaTime;
+            float incX = Mathf.Sin(Time.time * 65f) * 0.1f;
+            Vector3 posInc = new Vector3(incX, 0f, 0f);
+            transform.position += posInc;
         }
+
         if (timeLimit <= 0){
             falling = true;
         }
