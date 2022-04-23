@@ -59,6 +59,8 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             Anim.SetTrigger("Jump");
+            Anim.SetBool("Walk", false);
+            Anim.SetBool("Idle", false);
         }
         if (velocity.y > 0 && !Input.GetButtonDown("Jump"))
         {
@@ -76,12 +78,12 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-        Anim.SetBool("Walk", true);
+        
 
         if (direction.magnitude >= 0.1f)
         {
-
-            
+            Anim.SetBool("Idle", false);
+            Anim.SetBool("Walk", true);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -90,7 +92,12 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         
         }
-        
+        else
+        {
+            Anim.SetBool("Walk", false);
+            Anim.SetBool("Idle", true);
+        }
+       
 
     }
 }
