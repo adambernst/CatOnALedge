@@ -26,7 +26,7 @@ public class FallingLedge : MonoBehaviour
         if(falling){
             float yDrop = initialDrop - (gravConst * Time.deltaTime);
             Vector3 drop = new Vector3(0, yDrop, 0);
-            transform.position = transform.position + drop;
+            transform.position += drop;
         }
         
         if (transform.position.y < 0){
