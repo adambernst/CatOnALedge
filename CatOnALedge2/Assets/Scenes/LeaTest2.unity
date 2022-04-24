@@ -2547,7 +2547,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7767441, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5126,7 +5126,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7767441, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -34882,9 +34882,9 @@ Transform:
   - {fileID: 54809425}
   - {fileID: 1503170331}
   - {fileID: 710146940}
-  - {fileID: 2051479766}
-  - {fileID: 1023753474}
   - {fileID: 1903744244}
+  - {fileID: 1023753474}
+  - {fileID: 2051479766}
   - {fileID: 1322223660}
   - {fileID: 355208676}
   - {fileID: 1032067696}
@@ -35305,7 +35305,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7767441, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -42143,7 +42143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouth: {fileID: 1324577143}
-  message: Press E to pick up the kitten and Q to put it down
 --- !u!4 &1353818181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7247617169382428069, guid: b0e344e555f844f219f5e50d8c7326f7, type: 3}
@@ -55647,7 +55646,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7767441, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
