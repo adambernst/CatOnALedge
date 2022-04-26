@@ -29,12 +29,13 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
     public float lowJumpMultiplier = 2f;
 
     public Animator Anim;
+    public AudioFX audioFX;
 
 
     void Start()
     {
         Anim = GetComponentInChildren<Animator>();
-
+        audioFX = GetComponent<AudioFX>();
     }
 
     // Update is called once per frame
@@ -57,6 +58,7 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            audioFX.PlayMeow1();
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             Anim.SetTrigger("Jump");
             Anim.SetBool("Walk", false);
@@ -99,5 +101,11 @@ public class SeoyunThirdPersonMovement : MonoBehaviour
         }
        
 
+    }
+    
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Ground") {
+            audioFX.PlayThud();
+        }
     }
 }
