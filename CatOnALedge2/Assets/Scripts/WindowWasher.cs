@@ -37,10 +37,4 @@ public class WindowWasher : MonoBehaviour
         }
         transform.position += deltaY;
     }
-    
-    void OnCollisionEnter(Collision other){
-        if (other.gameObject.tag == "Player"){
-            other.collider.transform.parent = transform;
-        }
-    }
 }
