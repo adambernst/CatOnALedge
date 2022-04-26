@@ -13,6 +13,8 @@ public class Respawn : MonoBehaviour
     //private List<Transform> respawnPoints;
     private Transform[] allPoints = new Transform[3];
     
+    public HeartSystem heartSystem;
+    
     
     void Start()
     {
@@ -24,6 +26,14 @@ public class Respawn : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         player.transform.position = (allPoints[checkIndex]).transform.position;
+        
+        heartSystem.TakeDamage(1);
+        Debug.Log("done with damage");
+        
+        // if (other.gameObject.tag == "Player") {
+        //     other.gameObject.HeartSystem.TakeDamage(1);
+        // 
+        //             Debug.Log("done with damage!");
+        // }
     }
-    
 }

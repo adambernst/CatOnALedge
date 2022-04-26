@@ -23,7 +23,9 @@ public class HeartSystem : MonoBehaviour
     }
     
     public void TakeDamage(int d) {
+        Debug.Log("Taking damage!");
         if (life >= 1) {
+            Debug.Log("in if statement");
             life -= d;
             Destroy(hearts[life].gameObject);
             if (life < 1) 
