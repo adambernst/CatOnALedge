@@ -10,10 +10,12 @@ public class Respawn : MonoBehaviour
     [SerializeField] private Transform checkpoint2;
     public int checkIndex = 0;
     
-    //private List<Transform> respawnPoints;
-    private Transform[] allPoints = new Transform[3];
+    public GameObject lostLifeText;
     
     public HeartSystem heartSystem;
+    
+    //private List<Transform> respawnPoints;
+    private Transform[] allPoints = new Transform[3];
     
     
     void Start()
@@ -25,15 +27,16 @@ public class Respawn : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        player.transform.position = (allPoints[checkIndex]).transform.position;
-        
         heartSystem.TakeDamage(1);
-        Debug.Log("done with damage");
         
-        // if (other.gameObject.tag == "Player") {
-        //     other.gameObject.HeartSystem.TakeDamage(1);
-        // 
-        //             Debug.Log("done with damage!");
-        // }
+        lostLifeText.SetActive(true);
+        StartCoroutine(DeactivateText());
+        
+        player.transform.position = (allPoints[checkIndex]).transform.position;
+    }
+    
+    IEnumerator DeactivateText() {
+        yield return new WaitForSeconds(1.5f);
+        lostLifeText.SetActive(false);
     }
 }

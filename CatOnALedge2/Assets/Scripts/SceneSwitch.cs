@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
-    public void StartGame() {
+    public void PlayTutorial() {
         SceneManager.LoadScene("MainScene");
     }
+    
+    public void PlayLevelOne() {
+        SceneManager.LoadScene("LevelOne");
+    }
+    
 }

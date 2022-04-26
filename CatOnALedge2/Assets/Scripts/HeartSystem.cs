@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HeartSystem : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class HeartSystem : MonoBehaviour
     void Update()
     {
         if (dead == true) {
-            // DEATH SCREEN AND SUCH
+            SceneManager.LoadScene("DeathScene");
             Debug.Log("WE ARE DEAD !!!");
         }
     
@@ -24,6 +26,7 @@ public class HeartSystem : MonoBehaviour
     
     public void TakeDamage(int d) {
         Debug.Log("Taking damage!");
+
         if (life >= 1) {
             Debug.Log("in if statement");
             life -= d;
