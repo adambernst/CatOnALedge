@@ -630,7 +630,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 771823873}
         m_TargetAssemblyTypeName: SceneSwitch, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: PlayLevelOne
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
