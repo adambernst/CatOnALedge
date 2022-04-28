@@ -13,7 +13,10 @@ public class PickUpObject : MonoBehaviour
     bool overBed = false;
     
     public GameObject tutorialText;
-        
+    
+    public GameObject returnedText;
+    public int kittensReturned = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +36,8 @@ public class PickUpObject : MonoBehaviour
                 kitten.transform.parent = mouth.transform; //makes the object become a child of the parent so that it moves with the hands
                 hasItem = true;
                 
-                StopCoroutine(DeactivateText(0f));
-                Text textBox = tutorialText.GetComponent<Text>();
-                textBox.text = "Bring Kittens to cat beds to rescue them";
-                tutorialText.SetActive(true);
-                StartCoroutine(DeactivateText(3f));
+                string newText = "Bring Kittens to cat beds to rescue them";
+                replaceText(newText, 3f);
             }
         }
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
@@ -50,6 +50,9 @@ public class PickUpObject : MonoBehaviour
             if (overBed){
                 Destroy(kitten);
                 overBed = false;
+                kittensReturned ++;
+                Text textBox = returnedText.GetComponent<Text>();
+                textBox.text = "Kittens Returned: " + kittensReturned;
             }
         }
     }
@@ -64,14 +67,19 @@ public class PickUpObject : MonoBehaviour
             kitten = other.gameObject; //set the gameobject you collided with to one you can reference
             GameObject kitParent = kitten.transform.root.gameObject; //parent.gameObject;
             
-            StopCoroutine(DeactivateText(0f));
-            Text textBox = tutorialText.GetComponent<Text>();
-            textBox.text = "Press E to pick up the Kitten and Q to put it down";
-            tutorialText.SetActive(true);
-            StartCoroutine(DeactivateText(1.5f));
+            string newText = "Press E to pick up the Kitten and Q to put it down";
+            replaceText(newText, 1.5f);
             
             overBed = false;
         }
+    }
+    
+    private void replaceText(string newText, float time){
+        StopCoroutine(DeactivateText(0f));
+        Text textBox = tutorialText.GetComponent<Text>();
+        textBox.text = newText;
+        tutorialText.SetActive(true);
+        StartCoroutine(DeactivateText(time));
     }
     
     IEnumerator DeactivateText(float time) {
