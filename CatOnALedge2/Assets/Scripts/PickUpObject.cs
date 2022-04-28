@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
  
 public class PickUpObject : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class PickUpObject : MonoBehaviour
     bool hasItem; // a bool to see if you have an item in your hand
     bool overBed = false;
     
-    bool displayMessage = false;
-    int messageCode = 0;
+    public GameObject tutorialText;
         
     // Start is called before the first frame update
     void Start()
@@ -28,11 +28,16 @@ public class PickUpObject : MonoBehaviour
         {
             if (Input.GetKey("e") && !hasItem)  // can be e or any key
             {
-                displayMessage = false;
                 kitten.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
                 kitten.transform.position = mouth.transform.position; // sets the position of the object to your hand position
                 kitten.transform.parent = mouth.transform; //makes the object become a child of the parent so that it moves with the hands
                 hasItem = true;
+                
+                StopCoroutine(DeactivateText(0f));
+                Text textBox = tutorialText.GetComponent<Text>();
+                textBox.text = "Bring Kittens to cat beds to rescue them";
+                tutorialText.SetActive(true);
+                StartCoroutine(DeactivateText(3f));
             }
         }
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
@@ -58,11 +63,20 @@ public class PickUpObject : MonoBehaviour
             canpickup = true;  //set the pick up bool to true
             kitten = other.gameObject; //set the gameobject you collided with to one you can reference
             GameObject kitParent = kitten.transform.root.gameObject; //parent.gameObject;
-            //kitScript = kitParent.GetComponent<KittenManager>();
-            displayMessage = true;
-            messageCode = 1;
+            
+            StopCoroutine(DeactivateText(0f));
+            Text textBox = tutorialText.GetComponent<Text>();
+            textBox.text = "Press E to pick up the Kitten and Q to put it down";
+            tutorialText.SetActive(true);
+            StartCoroutine(DeactivateText(1.5f));
+            
             overBed = false;
         }
+    }
+    
+    IEnumerator DeactivateText(float time) {
+        yield return new WaitForSeconds(time);
+        tutorialText.SetActive(false);
     }
     
     private void OnCollisionEnter(Collision other)
@@ -75,17 +89,5 @@ public class PickUpObject : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         canpickup = false; //when you leave the collider set the canpickup bool to false
-        displayMessage = false;
-    }
-    
-    void OnGUI()
-    {
-        string message = "";
-        if (messageCode == 1 && displayMessage && !hasItem) {
-            message = "Press E to pick up the kitten and Q to put it down";
-        } else if (messageCode == 2 && overBed) {
-            message = "Place the kittens in the cat bed to save them";
-        }
-        GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), message);
     }
 }
