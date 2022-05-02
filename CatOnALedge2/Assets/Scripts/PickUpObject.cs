@@ -37,7 +37,7 @@ public class PickUpObject : MonoBehaviour
                 hasItem = true;
                 
                 string newText = "Bring Kittens to cat beds to rescue them";
-                replaceText(newText, 3f);
+                replaceText(newText, 4f);
             }
         }
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
@@ -71,6 +71,13 @@ public class PickUpObject : MonoBehaviour
             replaceText(newText, 1.5f);
             
             overBed = false;
+        }
+        
+        if(other.gameObject.tag == "TutorialHelper")
+        {
+            TutorialHelper script = other.gameObject.GetComponent<TutorialHelper>();
+            //Debug.Log(script.message);
+            replaceText(script.message, script.duration);
         }
     }
     
