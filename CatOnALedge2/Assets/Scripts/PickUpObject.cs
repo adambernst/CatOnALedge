@@ -32,7 +32,8 @@ public class PickUpObject : MonoBehaviour
             if (Input.GetKey("e") && !hasItem)  // can be e or any key
             {
                 kitten.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
-                kitten.transform.position = mouth.transform.position; // sets the position of the object to your hand position
+                Vector3 pickUpMod = new Vector3(0f, -0.7f, 0f);
+                kitten.transform.position = mouth.transform.position + pickUpMod; // sets the position of the object to your hand position
                 kitten.transform.parent = mouth.transform; //makes the object become a child of the parent so that it moves with the hands
                 hasItem = true;
                 
@@ -43,7 +44,7 @@ public class PickUpObject : MonoBehaviour
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
         {
             kitten.GetComponent<Rigidbody>().isKinematic = false; // make the rigidbody work again
-            Vector3 modifier = new Vector3(0f, -1.9f, 0f);
+            Vector3 modifier = new Vector3(0f, -1.2f, 0f);
             kitten.transform.position = kitten.transform.position + modifier;
             kitten.transform.parent = null; // make the object not be a child of the hands
             hasItem = false;
