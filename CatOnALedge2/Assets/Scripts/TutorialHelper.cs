@@ -6,4 +6,5 @@ public class TutorialHelper : MonoBehaviour
 {
     public string message;
     public float duration;
+    public bool seen = false;
 }

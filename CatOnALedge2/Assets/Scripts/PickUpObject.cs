@@ -37,7 +37,7 @@ public class PickUpObject : MonoBehaviour
                 hasItem = true;
                 
                 string newText = "Bring Kittens to cat beds to rescue them";
-                replaceText(newText, 4f);
+                StartCoroutine(replaceText(newText, 4f));
             }
         }
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
@@ -68,7 +68,7 @@ public class PickUpObject : MonoBehaviour
             GameObject kitParent = kitten.transform.root.gameObject; //parent.gameObject;
             
             string newText = "Press E to pick up the Kitten and Q to put it down";
-            replaceText(newText, 1.5f);
+            StartCoroutine(replaceText(newText, 1.5f));
             
             overBed = false;
         }
@@ -77,16 +77,19 @@ public class PickUpObject : MonoBehaviour
         {
             TutorialHelper script = other.gameObject.GetComponent<TutorialHelper>();
             //Debug.Log(script.message);
-            replaceText(script.message, script.duration);
+            if (script.seen == false){
+                script.seen = true;
+                StartCoroutine(replaceText(script.message, script.duration));
+            }
         }
     }
     
-    private void replaceText(string newText, float time){
-        StopCoroutine(DeactivateText(0f));
+    private IEnumerator replaceText(string newText, float time){
+        //StopCoroutine(DeactivateText(0f));
         Text textBox = tutorialText.GetComponent<Text>();
         textBox.text = newText;
         tutorialText.SetActive(true);
-        StartCoroutine(DeactivateText(time));
+        yield return StartCoroutine(DeactivateText(time));
     }
     
     IEnumerator DeactivateText(float time) {
