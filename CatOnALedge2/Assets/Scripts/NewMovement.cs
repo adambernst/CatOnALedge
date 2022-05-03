@@ -12,6 +12,7 @@ public class NewMovement : MonoBehaviour
     [HideInInspector]
     public CharacterController mCharacterController;
     public Animator Anim;
+    public Vector3 direction;
 
     public float mWalkSpeed = 1.5f;
     public float mRunSpeed = 3.0f;
@@ -36,15 +37,13 @@ public class NewMovement : MonoBehaviour
     public AudioFX audioFX;
 
   /* Start is called before the first frame update */
-  void Start()
-  {
+  void Start(){
     mCharacterController = GetComponent<CharacterController>();
     Anim = GetComponentInChildren<Animator>();
     audioFX = GetComponent<AudioFX>();
   }
 
-  void Update()
-  {
+  void Update(){
     // Jump();
     Move();   
   }
@@ -53,8 +52,7 @@ public class NewMovement : MonoBehaviour
    * Function: Move()
    * Purpose: movement controls for character
    */ 
-  public void Move()
-  {
+  public void Move(){
     float h = Input.GetAxis("Horizontal");
     float v = Input.GetAxis("Vertical");
     float speed = mWalkSpeed;
@@ -67,7 +65,7 @@ public class NewMovement : MonoBehaviour
     mCharacterController.Move(transform.forward * v * speed * Time.deltaTime);
     transform.Rotate(0.0f, h * mRotationSpeed * Time.deltaTime, 0.0f);
     
-    Vector3 direction = new Vector3(h, 0f, v).normalized;
+    direction = new Vector3(h, 0f, v).normalized;
     // if (direction != Vector3.zero)
     // {
     //     Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -85,36 +83,29 @@ public class NewMovement : MonoBehaviour
         //     // controller.Move(cam.transform.forward * speed * Time.deltaTime);
         // }
 
-
-
     /* apply gravity */
     mVelocity.y += mGravity * Time.deltaTime;
     mCharacterController.Move(mVelocity * Time.deltaTime);
 
-    if (mCharacterController.isGrounded && mVelocity.y < 0) 
-    {
+    if (mCharacterController.isGrounded && mVelocity.y < 0){
         mVelocity.y = 0f;
     }
 
     /* apply animation rules */
-    if(direction.magnitude >= 0.1f) 
-    {
-        Anim.SetBool("Idle", false);
-        Anim.SetBool("Walk", true);
-    }
-    else 
-    {
+    //if(direction.magnitude >= 0.1f) {
+    if ((h==0)&&(v==0)){
+        //Anim.SetBool("Idle", false);
         Anim.SetBool("Walk", false);
-        Anim.SetBool("Idle", true);       
     }
-    if (Anim != null)
-    {
+    else {
+        Anim.SetBool("Walk", true);
+        //Anim.SetBool("Idle", true);       
+    }
+    //if (Anim != null){
     //   Anim.SetFloat("PosZ", v * speed / mRunSpeed);
-    }
+    //}
 
-
-
-          //jump
+        //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         // if (isGrounded && velocity.y < 0)
@@ -123,18 +114,17 @@ public class NewMovement : MonoBehaviour
         //     // velocity += Vector3.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         // }
 
-        if (mVelocity.y < 0)
-        {
+        if (mVelocity.y < 0){
             mVelocity.y += mGravity * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if ((Input.GetButtonDown("Jump") && isGrounded) || (mVelocity.y <= -45f))
         {
             audioFX.PlayMeow1();
             mVelocity.y = Mathf.Sqrt(jumpHeight * -2 * mGravity);
             Anim.SetTrigger("Jump");
-            Anim.SetBool("Walk", false);
-            Anim.SetBool("Idle", false);
+            //Anim.SetBool("Walk", false);
+            //Anim.SetBool("Idle", false);
         }
         if (mVelocity.y > 0 && !Input.GetButtonDown("Jump"))
         {
