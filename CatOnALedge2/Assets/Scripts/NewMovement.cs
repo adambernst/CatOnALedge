@@ -7,8 +7,7 @@ using System.Security.Cryptography;
 using System.Threading;
 
 [RequireComponent(typeof(CharacterController))]
-public class NewMovement : MonoBehaviour
-{
+public class NewMovement : MonoBehaviour{
     [HideInInspector]
     public CharacterController mCharacterController;
     public Animator Anim;
@@ -29,6 +28,7 @@ public class NewMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
     public float jumpHeight = 3;
+	public float superFall = -100f;
     /////////////////////
 
     float turnSmoothVelocity;
@@ -36,41 +36,42 @@ public class NewMovement : MonoBehaviour
 
     public AudioFX audioFX;
 
-  /* Start is called before the first frame update */
-  void Start(){
-    mCharacterController = GetComponent<CharacterController>();
-    Anim = GetComponentInChildren<Animator>();
-    audioFX = GetComponent<AudioFX>();
-  }
+	/* Start is called before the first frame update */
+	void Start(){
+		mCharacterController = GetComponent<CharacterController>();
+		Anim = GetComponentInChildren<Animator>();
+		audioFX = GetComponent<AudioFX>();
+	}
 
-  void Update(){
-    // Jump();
-    Move();   
-  }
+	void Update(){
+		// Jump();
+		Move();   
+	}
 
-  /*
-   * Function: Move()
-   * Purpose: movement controls for character
-   */ 
-  public void Move(){
-    float h = Input.GetAxis("Horizontal");
-    float v = Input.GetAxis("Vertical");
-    float speed = mWalkSpeed;
 
-    if (Input.GetKey(KeyCode.LeftShift)) /* run if left shift key is down */ 
-    {
-      speed = mRunSpeed;
-    }
+	/*
+		Function: Move()
+		Purpose: movement controls for character
+	*/ 
+	public void Move(){
+		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis("Vertical");
+		float speed = mWalkSpeed;
 
-    mCharacterController.Move(transform.forward * v * speed * Time.deltaTime);
-    transform.Rotate(0.0f, h * mRotationSpeed * Time.deltaTime, 0.0f);
+		/* run if left shift key is down */ 
+		if (Input.GetKey(KeyCode.LeftShift)){
+			speed = mRunSpeed;
+		}
+
+		mCharacterController.Move(transform.forward * v * speed * Time.deltaTime);
+		transform.Rotate(0.0f, h * mRotationSpeed * Time.deltaTime, 0.0f);
     
-    direction = new Vector3(h, 0f, v).normalized;
-    // if (direction != Vector3.zero)
-    // {
-    //     Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-    //     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, mRotationSpeed * Time.deltaTime);
-    // }
+		direction = new Vector3(h, 0f, v).normalized;
+		// if (direction != Vector3.zero)
+		// {
+		//     Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+		//     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, mRotationSpeed * Time.deltaTime);
+		// }
 
         // if (direction.magnitude >= 0.1f)
         // {       
@@ -83,27 +84,24 @@ public class NewMovement : MonoBehaviour
         //     // controller.Move(cam.transform.forward * speed * Time.deltaTime);
         // }
 
-    /* apply gravity */
-    mVelocity.y += mGravity * Time.deltaTime;
-    mCharacterController.Move(mVelocity * Time.deltaTime);
+		/* apply gravity */
+		mVelocity.y += mGravity * Time.deltaTime;
+		mCharacterController.Move(mVelocity * Time.deltaTime);
 
-    if (mCharacterController.isGrounded && mVelocity.y < 0){
-        mVelocity.y = 0f;
-    }
+		if (mCharacterController.isGrounded && mVelocity.y < 0){
+			mVelocity.y = 0f;
+		}
 
-    /* apply animation rules */
-    //if(direction.magnitude >= 0.1f) {
-    if ((h==0)&&(v==0)){
-        //Anim.SetBool("Idle", false);
-        Anim.SetBool("Walk", false);
-    }
-    else {
-        Anim.SetBool("Walk", true);
-        //Anim.SetBool("Idle", true);       
-    }
-    //if (Anim != null){
-    //   Anim.SetFloat("PosZ", v * speed / mRunSpeed);
-    //}
+		/* apply animation rules */
+		//if(direction.magnitude >= 0.1f) {
+		if ((h==0)&&(v==0)){
+			//Anim.SetBool("Idle", false);
+			Anim.SetBool("Walk", false);
+		}else {
+			Anim.SetBool("Walk", true);
+			//Anim.SetBool("Idle", true);       
+		}
+		//if (Anim != null){   Anim.SetFloat("PosZ", v * speed / mRunSpeed);}
 
         //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -118,38 +116,31 @@ public class NewMovement : MonoBehaviour
             mVelocity.y += mGravity * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        if ((Input.GetButtonDown("Jump") && isGrounded) || (mVelocity.y <= -45f))
-        {
+        if ((Input.GetButtonDown("Jump") && isGrounded) || (mVelocity.y <= superFall)){
             audioFX.PlayMeow1();
             mVelocity.y = Mathf.Sqrt(jumpHeight * -2 * mGravity);
             Anim.SetTrigger("Jump");
             //Anim.SetBool("Walk", false);
             //Anim.SetBool("Idle", false);
         }
-        if (mVelocity.y > 0 && !Input.GetButtonDown("Jump"))
-        {
+		
+        if (mVelocity.y > 0 && !Input.GetButtonDown("Jump")){
             mVelocity.y += mGravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
         
-        void OnCollisionEnter(Collision other) {
-          if (other.gameObject.tag == "Ground") {
-            audioFX.PlayThud();
-          }
-        }
-
-
-        
   } /* end of Move() function */
+
+
+
 
 
   /*
    * Function: Jump()
    * Purpose: Jump controls for character
    */ 
-  public void Jump()
-  {
+  public void Jump(){
         //jump
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         // if (isGrounded && velocity.y < 0)
         // {
@@ -157,29 +148,29 @@ public class NewMovement : MonoBehaviour
         //     // velocity += Vector3.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         // }
 
-        if (mVelocity.y < 0)
-        {
-            mVelocity.y += mGravity * (fallMultiplier - 1) * Time.deltaTime;
-        }
+        // if (mVelocity.y < 0)
+        // {
+            // mVelocity.y += mGravity * (fallMultiplier - 1) * Time.deltaTime;
+        // }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            audioFX.PlayMeow1();
-            mVelocity.y = Mathf.Sqrt(jumpHeight * -2 * mGravity);
-            Anim.SetTrigger("Jump");
-            Anim.SetBool("Walk", false);
-            Anim.SetBool("Idle", false);
-        }
-        if (mVelocity.y > 0 && !Input.GetButtonDown("Jump"))
-        {
-            mVelocity.y += mGravity * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
+        // if (Input.GetButtonDown("Jump") && isGrounded)
+        // {
+            // audioFX.PlayMeow1();
+            // mVelocity.y = Mathf.Sqrt(jumpHeight * -2 * mGravity);
+            // Anim.SetTrigger("Jump");
+            //Anim.SetBool("Walk", false);
+            //Anim.SetBool("Idle", false);
+        // }
+        // if (mVelocity.y > 0 && !Input.GetButtonDown("Jump"))
+        // {
+            // mVelocity.y += mGravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+        // }
         
-        void OnCollisionEnter(Collision other) {
-          if (other.gameObject.tag == "Ground") {
-            audioFX.PlayThud();
-          }
-        }
+        // void OnCollisionEnter(Collision other) {
+          // if (other.gameObject.tag == "Ground") {
+            // audioFX.PlayThud();
+          // }
+        // }
   } /* end of Jump() function */
 
 }
