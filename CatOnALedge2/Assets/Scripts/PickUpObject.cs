@@ -10,7 +10,6 @@ public class PickUpObject : MonoBehaviour
     private GameObject kitten; // the gameobject onwhich you collided with
     //private KittenManager kitScript;
     bool hasItem; // a bool to see if you have an item in your hand
-    bool overBed = false;
     
     public GameObject tutorialText;
     
@@ -48,13 +47,6 @@ public class PickUpObject : MonoBehaviour
             kitten.transform.position = kitten.transform.position + modifier;
             kitten.transform.parent = null; // make the object not be a child of the hands
             hasItem = false;
-            if (overBed){
-                Destroy(kitten);
-                overBed = false;
-                kittensReturned ++;
-                Text textBox = returnedText.GetComponent<Text>();
-                textBox.text = "Kittens Returned: " + kittensReturned;
-            }
         }
     }
     
@@ -69,9 +61,7 @@ public class PickUpObject : MonoBehaviour
             GameObject kitParent = kitten.transform.root.gameObject; //parent.gameObject;
             
             string newText = "Press E to pick up the Kitten and Q to put it down";
-            StartCoroutine(replaceText(newText, 1.5f));
-            
-            overBed = false;
+            StartCoroutine(replaceText(newText, 1.5f));    
         }
         
         if(other.gameObject.tag == "TutorialHelper")
@@ -83,6 +73,13 @@ public class PickUpObject : MonoBehaviour
                 StartCoroutine(replaceText(script.message, script.duration));
             }
         }
+    }
+    
+    public void rescueKitten(){
+        Destroy(kitten);
+        kittensReturned ++;
+        Text textBox = returnedText.GetComponent<Text>();
+        textBox.text = "Kittens Returned: " + kittensReturned;
     }
     
     private IEnumerator replaceText(string newText, float time){
@@ -98,15 +95,11 @@ public class PickUpObject : MonoBehaviour
         tutorialText.SetActive(false);
     }
     
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.gameObject.tag == "kittenBed"){
-            overBed = true;
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
-        canpickup = false; //when you leave the collider set the canpickup bool to false
+        if (other.gameObject.tag == "kitten"){
+            canpickup = false; //when you leave the collider set the canpickup bool to false
+        }
+        
     }
 }
