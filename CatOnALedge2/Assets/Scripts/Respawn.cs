@@ -27,12 +27,17 @@ public class Respawn : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        heartSystem.TakeDamage(1);
+        if (other.gameObject.tag == "Player"){
+            heartSystem.TakeDamage(1);
+            
+            lostLifeText.SetActive(true);
+            StartCoroutine(DeactivateText());
+            
+            Debug.Log(checkIndex);
+            Transform newPos = allPoints[checkIndex].transform;
+            player.transform.position = newPos.position;
+        }
         
-        lostLifeText.SetActive(true);
-        StartCoroutine(DeactivateText());
-        
-        player.transform.position = (allPoints[checkIndex]).transform.position;
     }
     
     IEnumerator DeactivateText() {

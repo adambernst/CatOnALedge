@@ -80,6 +80,7 @@ public class PickUpObject : MonoBehaviour
         kittensReturned ++;
         Text textBox = returnedText.GetComponent<Text>();
         textBox.text = "Kittens Returned: " + kittensReturned;
+        hasItem = false;
     }
     
     private IEnumerator replaceText(string newText, float time){
@@ -102,4 +103,5 @@ public class PickUpObject : MonoBehaviour
         }
         
     }
+    
 }
