@@ -8,6 +8,8 @@ TagManager:
   - kitten
   - kittenBed
   - TutorialHelper
+  - MusicSlider
+  - FXSlider
   layers:
   - Default
   - TransparentFX
