@@ -145,11 +145,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Idle
-      takeName: Armature|Idle
+      name: Armature|Jump (1)
+      takeName: Armature|Jump
       internalID: 0
       firstFrame: 0
-      lastFrame: 69
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
