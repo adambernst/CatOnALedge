@@ -20,8 +20,8 @@ public class Checkpoint : MonoBehaviour
         }
     }
     
-    /*
     public void OnCollisionEnter(Collision cat) {
+        Debug.Log("CollisionHit");
         if (cat.gameObject.tag == "Player"){
             resScript = respawnTrigger.GetComponent<Respawn>();
             if (index > resScript.checkIndex) {
@@ -30,5 +30,4 @@ public class Checkpoint : MonoBehaviour
         }
         
     }
-    */
 }
