@@ -21,9 +21,8 @@ public class Respawn : MonoBehaviour
             lostLifeText.SetActive(true);
             StartCoroutine(DeactivateText());
             
-            Debug.Log(checkIndex);
             player.transform.position = (allPoints[checkIndex]).transform.position;
-            //Debug.Log("teleported");
+            Debug.Log("teleported");
         }    
     }
     
