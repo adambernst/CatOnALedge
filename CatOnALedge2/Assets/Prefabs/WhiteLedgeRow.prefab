@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8037628220866915175}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WhiteLedgeRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7294866311758036251, guid: d5cdc5208f1b2474092fbd62796289d4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.65
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7294866311758036251, guid: d5cdc5208f1b2474092fbd62796289d4, type: 3}
       propertyPath: m_LocalScale.y
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7294866311758036251, guid: d5cdc5208f1b2474092fbd62796289d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.507294
+      value: -37.1
       objectReference: {fileID: 0}
     - target: {fileID: 7294866311758036251, guid: d5cdc5208f1b2474092fbd62796289d4, type: 3}
       propertyPath: m_LocalPosition.y
