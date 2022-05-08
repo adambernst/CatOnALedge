@@ -131,9 +131,6 @@ public class NewMovement : MonoBehaviour{
   } /* end of Move() function */
 
 
-
-
-
   /*
    * Function: Jump()
    * Purpose: Jump controls for character

@@ -9,8 +9,9 @@ public class Checkpoint : MonoBehaviour
     private Respawn resScript;
     private bool touching = false;
     
-    public void OnControllerColliderHit(ControllerColliderHit other){
-        Debug.Log("ControllerColliderHit");
+
+    void OnTriggerEnter(Collider other)
+    {
         if (!touching){
             touching = true;
             resScript = respawnTrigger.GetComponent<Respawn>();
@@ -18,16 +19,5 @@ public class Checkpoint : MonoBehaviour
                 resScript.checkIndex = index;
             }
         }
-    }
-    
-    public void OnCollisionEnter(Collision cat) {
-        Debug.Log("CollisionHit");
-        if (cat.gameObject.tag == "Player"){
-            resScript = respawnTrigger.GetComponent<Respawn>();
-            if (index > resScript.checkIndex) {
-                resScript.checkIndex = index;
-            }
-        }
-        
     }
 }

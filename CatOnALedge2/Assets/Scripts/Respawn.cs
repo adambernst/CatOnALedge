@@ -18,11 +18,11 @@ public class Respawn : MonoBehaviour
             Debug.Log("Ground hit");
             heartSystem.TakeDamage(1);
             
-            lostLifeText.SetActive(true);
-            StartCoroutine(DeactivateText());
-            
             player.transform.position = (allPoints[checkIndex]).transform.position;
             Debug.Log("teleported");
+            
+            lostLifeText.SetActive(true);
+            StartCoroutine(DeactivateText());
         }    
     }
     
