@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6120280061431586375}
   - component: {fileID: 6150134427311316696}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: LedgePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 58009ff64dce24727bedbd470e4bdb4d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58009ff64dce24727bedbd470e4bdb4d, type: 3}
