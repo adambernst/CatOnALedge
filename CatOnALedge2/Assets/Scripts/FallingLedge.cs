@@ -10,11 +10,12 @@ public class FallingLedge : MonoBehaviour
     
     public float initialDrop = -0.2f;
     public float gravConst = 3f;
+    private float shakeSpeed = 65f;
         
     void Update(){
         if(timerActive && timeLimit > 0){
             timeLimit -= Time.deltaTime;
-            float incX = Mathf.Sin(Time.time * 65f) * 0.1f;
+            float incX = Mathf.Sin(Time.time * shakeSpeed) * 0.4f;
             Vector3 posInc = new Vector3(incX, 0f, 0f);
             transform.position += posInc;
         }
@@ -34,7 +35,7 @@ public class FallingLedge : MonoBehaviour
         }
     } 
     
-    public void OnCollisionEnter(Collision cat){
+    public void OnTriggerEnter(Collider cat){
         if (cat.gameObject.tag == "Player"){
             timerActive = true;
         }
