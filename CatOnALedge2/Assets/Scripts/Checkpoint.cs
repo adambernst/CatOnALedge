@@ -7,7 +7,7 @@ public class Checkpoint : MonoBehaviour
     public int index;
     public GameObject respawnTrigger;
     private Respawn resScript;
-    private bool touching = false;
+    //private bool touching = false;
     
 
     void OnTriggerEnter(Collider other)
