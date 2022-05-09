@@ -8,6 +8,7 @@ public class AudioFX : MonoBehaviour
     public AudioSource meow1;
     public AudioSource meow2;
     public AudioSource meow3;
+    public AudioSource kitten_meow1;
     
     public void PlayThud() {
         thud.Play();
@@ -15,6 +16,10 @@ public class AudioFX : MonoBehaviour
     
     public void PlayMeow1() {
         meow1.Play();
+    }
+
+    public void PlayKittenMeow1() {
+        kitten_meow1.Play();
     }
     
     

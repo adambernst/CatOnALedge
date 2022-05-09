@@ -15,12 +15,15 @@ public class PickUpObject : MonoBehaviour
     
     public GameObject returnedText;
     public int kittensReturned = 0;
+
+    public AudioFX audioFX;
     
     // Start is called before the first frame update
     void Start()
     {
         canpickup = false;    //setting both to false
         hasItem = false;
+        audioFX = GetComponent<AudioFX>();
     }
  
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class PickUpObject : MonoBehaviour
         {
             if (Input.GetKey("e") && !hasItem)  // can be e or any key
             {
+                audioFX.PlayKittenMeow1();
                 kitten.GetComponent<Rigidbody>().isKinematic = true;   //makes the rigidbody not be acted upon by forces
                 Vector3 pickUpMod = new Vector3(0f, -0.7f, 0f);
                 kitten.transform.position = mouth.transform.position + pickUpMod; // sets the position of the object to your hand position
@@ -42,6 +46,7 @@ public class PickUpObject : MonoBehaviour
         }
         if (Input.GetKey("q") && hasItem) // if you have an item and get the key to remove the object, again can be any key
         {
+            audioFX.PlayKittenMeow1();
             kitten.GetComponent<Rigidbody>().isKinematic = false; // make the rigidbody work again
             Vector3 modifier = new Vector3(0f, -1.2f, 0f);
             kitten.transform.position = kitten.transform.position + modifier;
@@ -76,6 +81,7 @@ public class PickUpObject : MonoBehaviour
     }
     
     public void rescueKitten(){
+        audioFX.PlayKittenMeow1();
         Destroy(kitten);
         kittensReturned ++;
         Text textBox = returnedText.GetComponent<Text>();

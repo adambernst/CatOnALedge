@@ -17,7 +17,7 @@ public class CamLeftRightSwitch : MonoBehaviour
 		player = GetComponent<CharacterController>();
 	}
 
-    void Update() {
+    void LateUpdate() {
         // Debug.Log(player.transform.eulerAngles.y);
         if ((player.transform.eulerAngles.y > 180 && player.transform.eulerAngles.y < 360)) { // player is facing backwards (relative to world)
             if (playerCollider.bounds.Intersects(rightCamTrigger.bounds)) {
