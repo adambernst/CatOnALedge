@@ -12,11 +12,13 @@ public class Checkpoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!touching){
-            touching = true;
+        if (other.gameObject.tag == "Player"){
+        // if (!touching){
+            // touching = true;
             resScript = respawnTrigger.GetComponent<Respawn>();
             if (index > resScript.checkIndex) {
                 resScript.checkIndex = index;
+                Debug.Log("index is now " + resScript.checkIndex);
             }
         }
     }

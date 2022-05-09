@@ -15,12 +15,14 @@ public class Respawn : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player"){
-            Debug.Log("Ground hit");
+            Debug.Log("Ground hit. player position = " + player.transform.position);
             heartSystem.TakeDamage(1);
             
+            player.GetComponent<CharacterController>().enabled = false;
             player.transform.position = (allPoints[checkIndex]).transform.position;
-            Debug.Log("teleported");
-            
+            player.GetComponent<CharacterController>().enabled = true;
+            Debug.Log("teleported. respawn position = " + (allPoints[checkIndex]).transform.position);
+            Debug.Log("New player position = " + player.transform.position);
             lostLifeText.SetActive(true);
             StartCoroutine(DeactivateText());
         }    

@@ -116,7 +116,8 @@ public class NewMovement : MonoBehaviour{
             mVelocity.y += mGravity * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        if ((Input.GetButtonDown("Jump") && isGrounded) || (mVelocity.y <= superFall)){
+        // if ((Input.GetButtonDown("Jump") && isGrounded) || (mVelocity.y <= superFall)){
+        if (Input.GetButtonDown("Jump") && isGrounded){
             audioFX.PlayMeow1();
             mVelocity.y = Mathf.Sqrt(jumpHeight * -2 * mGravity);
             Anim.SetTrigger("Jump");
