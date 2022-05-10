@@ -18,7 +18,6 @@ public class SceneSwitch : MonoBehaviour
         SceneManager.LoadScene("NewOne");
     }
     
-   
     public void ToLevelTwo()
     {
         SceneManager.LoadScene("NewTwo");
