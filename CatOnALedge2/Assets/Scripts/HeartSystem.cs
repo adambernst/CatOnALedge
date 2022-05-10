@@ -9,6 +9,7 @@ public class HeartSystem : MonoBehaviour
     public GameObject[] hearts;
     private int life; 
     private bool dead;
+    public int currLevel;
     
     public GameObject musicPlayer;
     private AudioFX audioFX;
@@ -23,7 +24,16 @@ public class HeartSystem : MonoBehaviour
     {
         if (dead == true) {
             audioFX.PlayLostLife();
-            SceneManager.LoadScene("DeathScene");
+            if (currLevel == 0) {
+                SceneManager.LoadScene("DeathScene0");
+            } else if (currLevel == 1) {
+                SceneManager.LoadScene("DeathScene1");
+            } else if (currLevel == 2) {
+                SceneManager.LoadScene("DeathScene2");
+            } else if (currLevel == 3) {
+                SceneManager.LoadScene("DeathScene3");
+            }
+            
         }
     
     }
