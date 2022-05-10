@@ -10,25 +10,28 @@ public class HeartSystem : MonoBehaviour
     private int life; 
     private bool dead;
     
+    public GameObject musicPlayer;
+    private AudioFX audioFX;
+    
     void Start() {
         life = hearts.Length;
+        audioFX = musicPlayer.GetComponent<AudioFX>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (dead == true) {
+            audioFX.PlayLostLife();
             SceneManager.LoadScene("DeathScene");
-            Debug.Log("WE ARE DEAD !!!");
         }
     
     }
     
     public void TakeDamage(int d) {
-        Debug.Log("Taking damage!");
 
         if (life >= 1) {
-            Debug.Log("in if statement");
+            audioFX.PlayLostLife();
             life -= d;
             Destroy(hearts[life].gameObject);
             if (life < 1) 
