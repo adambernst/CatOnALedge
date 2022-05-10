@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Levels/MainScene.unity
     guid: 3e1ddd7a8012bf2498ecc1115486e4e0
   - enabled: 0
-    path: Assets/Scenes/LevelOne.unity
+    path: Assets/Scenes/Test Levels/LevelOne.unity
     guid: 1afdc31c49d20dc4282b70eb81f55108
   - enabled: 0
     path: Assets/Scenes/DeathScene.unity
