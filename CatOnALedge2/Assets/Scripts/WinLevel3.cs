@@ -9,7 +9,7 @@ public class WinLevel3 : MonoBehaviour
     {
         if (cat.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("WinScene");
+            SceneManager.LoadScene("WinScene3");
         }
     }
 }

@@ -5,16 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void PlayTutorial() {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("NewTutorial");
     }
     
     public void PlayLevelOne() {
-        SceneManager.LoadScene("LevelOne");
+        SceneManager.LoadScene("NewOne");
     }
     
-    public void ToMainMenu() {
-        SceneManager.LoadScene("MainMenu");
+   
+    public void ToLevelTwo()
+    {
+        SceneManager.LoadScene("NewTwo");
     }
-    
+
+    public void ToLevelThree()
+    {
+        SceneManager.LoadScene("LevelTwo");
+    }
+
 }
