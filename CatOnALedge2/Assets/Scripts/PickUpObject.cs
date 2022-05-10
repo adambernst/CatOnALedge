@@ -16,14 +16,15 @@ public class PickUpObject : MonoBehaviour
     public GameObject returnedText;
     public int kittensReturned = 0;
 
-    public AudioFX audioFX;
+    public GameObject musicPlayer;
+    private AudioFX audioFX;
     
     // Start is called before the first frame update
     void Start()
     {
         canpickup = false;    //setting both to false
         hasItem = false;
-        audioFX = GetComponent<AudioFX>();
+        audioFX = musicPlayer.GetComponent<AudioFX>();
     }
  
     // Update is called once per frame

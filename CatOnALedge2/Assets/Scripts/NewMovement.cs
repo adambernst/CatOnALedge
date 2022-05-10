@@ -34,13 +34,14 @@ public class NewMovement : MonoBehaviour{
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
 
-    public AudioFX audioFX;
+    public GameObject musicPlayer;
+    private AudioFX audioFX;
 
 	/* Start is called before the first frame update */
 	void Start(){
 		mCharacterController = GetComponent<CharacterController>();
 		Anim = GetComponentInChildren<Animator>();
-		audioFX = GetComponent<AudioFX>();
+		audioFX = musicPlayer.GetComponent<AudioFX>();
 	}
 
 	void Update(){
