@@ -12,6 +12,7 @@ public class PickUpObject : MonoBehaviour
     bool hasItem; // a bool to see if you have an item in your hand
     
     public GameObject tutorialText;
+    public GameObject tutorialBox;
     
     public GameObject returnedText;
     public int kittensReturned = 0;
@@ -95,12 +96,14 @@ public class PickUpObject : MonoBehaviour
         Text textBox = tutorialText.GetComponent<Text>();
         textBox.text = newText;
         tutorialText.SetActive(true);
+        tutorialBox.SetActive(true);
         yield return StartCoroutine(DeactivateText(time));
     }
     
     IEnumerator DeactivateText(float time) {
         yield return new WaitForSeconds(time);
         tutorialText.SetActive(false);
+        tutorialBox.SetActive(false);
     }
     
     private void OnTriggerExit(Collider other)
