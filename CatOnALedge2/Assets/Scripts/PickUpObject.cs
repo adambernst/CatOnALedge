@@ -89,8 +89,8 @@ public class PickUpObject : MonoBehaviour
         Text textBox = returnedText.GetComponent<Text>();
         textBox.text = "Kittens Returned: " + kittensReturned;
         hasItem = false;
-        GameHandler.control.kittenCount = kittensReturned;
-        Debug.Log("GameHandler score is " + GameHandler.control.kittenCount);
+        // GameHandler.control.kittenCount = kittensReturned;
+        // Debug.Log("GameHandler score is " + GameHandler.control.kittenCount);
     }
     
     private IEnumerator replaceText(string newText, float time){
