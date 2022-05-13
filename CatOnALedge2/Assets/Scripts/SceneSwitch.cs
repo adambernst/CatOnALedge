@@ -11,6 +11,7 @@ public class SceneSwitch : MonoBehaviour
     }
 
     public void PlayTutorial() {
+        Debug.Log("Render is ");
         SceneManager.LoadScene("NewTutorial");
     }
     
